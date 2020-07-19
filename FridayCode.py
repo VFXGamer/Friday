@@ -32,11 +32,8 @@ def wishMe():
     speak("I am Friday. What can I do for you.")       
 
 def joke():
-    elif 'tell me a joke' in query:
-        res = requests.get(
-                'https://icanhazdadjoke.com/',
-                headers={"Accept":"application/json"}
-                )
+    res = requests.get('https://icanhazdadjoke.com/',
+                headers={"Accept":"application/json"})
         if res.status_code == requests.codes.ok:
             speak('Here is an awesome joke for you- ')
             speak(str(res.json()['joke']))
