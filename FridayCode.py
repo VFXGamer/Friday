@@ -102,8 +102,6 @@ if __name__ == "__main__":
         if res.status_code == requests.codes.ok:
             speak('Here is an awesome joke for you- ')
             speak(str(res.json()['joke']))
-        else:
-            speak('oops!I ran out of jokes')
 
         elif 'email' in query:
             try:
