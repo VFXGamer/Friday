@@ -94,6 +94,16 @@ if __name__ == "__main__":
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak(f"Sir, the time is {strTime}")
 
+        elif 'tell me a joke' in command:
+        res = requests.get(
+                'https://icanhazdadjoke.com/',
+                headers={"Accept":"application/json"}
+                )
+        if res.status_code == requests.codes.ok:
+            speak('Here is an awesome joke for you- ')
+            speak(str(res.json()['joke']))
+        else:
+            speak('oops!I ran out of jokes')
 
         elif 'email' in query:
             try:
