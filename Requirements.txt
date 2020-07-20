@@ -5,3 +5,4 @@ wikipedia
 webbrowser
 smtplib
 PyAudio
+requests
