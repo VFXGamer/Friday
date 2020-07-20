@@ -5,6 +5,7 @@ import wikipedia
 import webbrowser
 import smtplib
 import pyaudio
+import requests
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -32,17 +33,17 @@ def wishMe():
     speak("I am Friday. What can I do for you.")       
 
 def joke():
-    res = requests.get('https://icanhazdadjoke.com/',
-                headers={"Accept":"application/json"})
-        if res.status_code == requests.codes.ok:
+    res = requests.get(
+                'https://icanhazdadjoke.com/',
+                headers={"Accept":"application/json"}
+                )
+    if res.status_code == requests.codes.ok:
             speak('Here is an awesome joke for you- ')
             speak(str(res.json()['joke']))
-        else:
-            speak('oops!I ran out of jokes')
+    else:
+        speak('oops!I ran out of jokes')
 
 def takeCommand():
-    #It takes microphone input from the user and returns string output
-
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
@@ -61,12 +62,12 @@ def takeCommand():
     return query
 
 def sendEmail(to, content):
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.ehlo()
-    server.starttls()
-    server.login('youremail@gmail.com', 'your-password')
-    server.sendmail('youremail@gmail.com', to, content)
-    server.close()
+     server = smtplib.SMTP('smtp.gmail.com', 587)
+     server.ehlo()
+     server.starttls()
+     server.login('youremail@gmail.com', 'your-password')
+     server.sendmail('youremail@gmail.com', to, content)
+     server.close()
 
 if __name__ == "__main__":
     wishMe()
@@ -99,7 +100,7 @@ if __name__ == "__main__":
             webbrowser.open("facebook.com")
       
 
-        elif 'the time' in query:
+        elif 'what is the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak(f"Sir, the time is {strTime}")
 
