@@ -104,7 +104,7 @@ if __name__ == "__main__":
             speak(f"Sir, the time is {strTime}")
 
         elif 'tell me a joke' in query:
-             speak(joke())
+             joke()
        
 
         elif 'email' in query:
