@@ -6,6 +6,8 @@ import webbrowser
 import smtplib
 import pyaudio
 import requests
+import time
+import json
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -43,6 +45,32 @@ def joke():
     else:
         speak('oops!I ran out of jokes')
 
+def playgame():
+    speak('Tell me which game should open on web')
+    query = takeCommand().lower()
+    if 'power line' in query:
+        webbrowser.open("powerline.io")
+        
+    elif 'gartic' in query:
+		    webbrowser.open("gartic.io")
+    elif 'slither' in query:
+            webbrowser.open("slither.io")
+    elif 'hexar' in query:
+            webbrowser.open("hexar.io")    
+    
+    else:
+        speak('Sorry sir i am facing some issue')
+
+
+def areminder():
+    speak("What shall I remind you about?")
+    text = str(takeCommand())
+    speak("In how many minutes?")
+    local_time = float(takeCommand())
+    local_time = local_time * 60
+    time.sleep(local_time)
+    speak(text)
+
 def takeCommand():
     r = sr.Recognizer()
     with sr.Microphone() as source:
@@ -56,7 +84,7 @@ def takeCommand():
         print(f"User said: {query}\n")
 
     except Exception as e:
-       # print(e)    
+        print(e)    
         print("Please repeat...")  
         return "None"
     return query
@@ -103,10 +131,16 @@ if __name__ == "__main__":
         elif 'what is the time' in query:
             strTime = datetime.datetime.now().strftime("%H:%M:%S")    
             speak(f"Sir, the time is {strTime}")
-
+            print(strTime)
+        
         elif 'tell me a joke' in query:
              joke()
        
+        elif 'open game' in query:
+             playgame()
+        
+        elif 'reminder' in query:
+             areminder()
 
         elif 'email' in query:
             try:
