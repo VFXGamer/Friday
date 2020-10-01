@@ -17,6 +17,7 @@ engine.setProperty('voice', voices[1].id)
 # 0 = Male Voice
 
 def speak(audio):
+    '''speak output'''
     engine.say(audio)
     engine.runAndWait()
 
@@ -35,6 +36,7 @@ def wishMe():
     speak("I am Friday. What can I do for you.")       
 
 def joke():
+	'''joke function'''
     res = requests.get(
                 'https://icanhazdadjoke.com/',
                 headers={"Accept":"application/json"}
@@ -46,6 +48,7 @@ def joke():
         speak('oops!I ran out of jokes')
 
 def playgame():
+	'''game function'''
     speak('Tell me which game should open on web')
     query = takeCommand().lower()
     if 'power line' in query:
@@ -63,6 +66,7 @@ def playgame():
 
 
 def areminder():
+	'''set a remainder function'''
     speak("What shall I remind you about?")
     text = str(takeCommand())
     speak("In how many minutes?")
@@ -72,6 +76,7 @@ def areminder():
     speak(text)
 
 def takeCommand():
+	'''takes voice commands from the user'''
     r = sr.Recognizer()
     with sr.Microphone() as source:
         print("Listening...")
@@ -90,6 +95,7 @@ def takeCommand():
     return query
 
 def sendEmail(to, content):
+	'''send mail function'''
      server = smtplib.SMTP('smtp.gmail.com', 587)
      server.ehlo()
      server.starttls()
