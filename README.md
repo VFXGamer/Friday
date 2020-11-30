@@ -1,5 +1,4 @@
 # Friday
-Visit my website for installation process.
 
 
 I have not added simple interactive commands.
